@@ -1,0 +1,23 @@
+<projects type="array">
+  <project>
+    <id>1</id>
+    <name>Redmine</name>
+    <identifier>redmine</identifier>
+    <description>
+      Redmine is a flexible project management web application written using Ruby on Rails framework.
+    </description>
+    <created_on>Sat Sep 29 12:03:04 +0200 2007</created_on>
+    <updated_on>Sun Mar 15 12:35:11 +0100 2009</updated_on>
+  </project>
+  <project>
+    <id>2</id>
+    <name>Redmine</name>
+    <identifier>redmine</identifier>
+    <description>
+      Redmine is a flexible project management web application written using Ruby on Rails framework.
+    </description>
+    <homepage></homepage>
+    <created_on>Sat Sep 29 12:03:04 +0200 2007</created_on>
+    <updated_on>Sun Mar 15 12:35:11 +0100 2009</updated_on>
+  </project>
+</projects>

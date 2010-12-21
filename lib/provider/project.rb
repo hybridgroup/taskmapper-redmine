@@ -1,11 +1,11 @@
 module TicketMaster::Provider
-  module Yoursystem
+  module Redmine
     # Project class for ticketmaster-yoursystem
     # 
     # 
     class Project < TicketMaster::Provider::Base::Project
       # declare needed overloaded methods here
-      
+      API = RedmineAPI::Project      
       
       # copy from this.copy(that) copies that into this
       def copy(project)

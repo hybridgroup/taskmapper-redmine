@@ -1,5 +1,5 @@
 module TicketMaster::Provider
-  module Yoursystem
+  module Redmine
     # Ticket class for ticketmaster-yoursystem
     #
     

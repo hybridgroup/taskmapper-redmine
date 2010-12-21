@@ -1,5 +1,5 @@
 module TicketMaster::Provider
-  module Yoursysten
+  module Redmine
     # The comment class for ticketmaster-yoursystem
     #
     # Do any mapping between Ticketmaster and your system's comment model here
