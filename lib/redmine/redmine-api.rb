@@ -27,9 +27,13 @@ module RedmineAPI
     end
   end
 
-  class Project < Base
-  end
-
   class Issue < Base
   end
+
+  class Project < Base
+    def tickets(options = {})
+      Issue.find(:all, :params => options.update(:project_id => id)) 
+    end
+  end
+
 end
