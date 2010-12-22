@@ -26,6 +26,10 @@ module TicketMaster::Provider
         self[:identifier]
       end
 
+      def ticket!(*options)
+        TicketMaster::Provider::Redmine::Ticket.open(name, {:params => options.first})
+      end
+
     end
   end
 end

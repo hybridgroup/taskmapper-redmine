@@ -3,12 +3,14 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ticketmaster::Provider::Redmine::Ticket" do
   before(:all) do
     headers = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Accept' => 'application/xml'}
+    headers_post_put = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Content-Type' => 'application/xml'}
     @project_id = 'test-repo12'
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
       mock.get '/projects/test-repo12.xml', headers, fixture_for('projects/test-repo12'), 200
       mock.get '/issues.xml', headers, fixture_for('issues'), 200
       mock.get '/issues/4326.xml', headers, fixture_for('issues/4326'), 200
+      mock.put '/issues/4326.xml', headers_post_put, '', 200
     end
   end
 
@@ -51,6 +53,17 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @ticket = @project.ticket(:id => 4326)
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == 4326
+  end
+
+  it "should be able to update and save a ticket" do 
+    @ticket = @project.ticket(4326)
+    @ticket.description = 'hello'
+    @ticket.save.should == true
+  end
+
+  it "should be able to create a ticket" do 
+    @ticket = @project.ticket!(:title => 'Ticket #12', :description => 'Body')
+    @ticket.should be_an_instance_of(@klass)
   end
 
 end
