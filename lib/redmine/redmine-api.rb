@@ -28,6 +28,9 @@ module RedmineAPI
   end
 
   class Issue < Base
+    def name
+      self.id
+    end
   end
 
   class Project < Base

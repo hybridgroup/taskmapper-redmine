@@ -7,6 +7,8 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
       mock.get '/projects/test-repo12.xml', headers, fixture_for('projects/test-repo12'), 200
+      mock.get '/issues.xml', headers, fixture_for('issues'), 200
+      mock.get '/issues/4326.xml', headers, fixture_for('issues/4326'), 200
     end
   end
 
@@ -20,4 +22,35 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @project.tickets.should be_an_instance_of(Array)
     @project.tickets.first.should be_an_instance_of(@klass)
   end
+
+  it "should be able to load all tickets based on an array of id's" do
+    @tickets = @project.tickets([4326])
+    @tickets.should be_an_instance_of(Array)
+    @tickets.first.should be_an_instance_of(@klass)
+    @tickets.first.id.should == 4326
+  end
+
+  it "should be able to load all tickets based on attributes" do
+    @tickets = @project.tickets(:id => 4326)
+    @tickets.should be_an_instance_of(Array)
+    @tickets.first.should be_an_instance_of(@klass)
+    @tickets.first.id.should == 4326
+  end
+
+  it "should return the ticket class" do
+    @project.ticket.should == @klass
+  end
+
+  it "should be able to load a single ticket" do
+    @ticket = @project.ticket(4326)
+    @ticket.should be_an_instance_of(@klass)
+    @ticket.id.should == 4326
+  end
+
+  it "shoule be able to load a single ticket based on attributes" do
+    @ticket = @project.ticket(:id => 4326)
+    @ticket.should be_an_instance_of(@klass)
+    @ticket.id.should == 4326
+  end
+
 end

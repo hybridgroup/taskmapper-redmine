@@ -2,6 +2,8 @@ module TicketMaster::Provider
   # This is the Yoursystem Provider for ticketmaster
   module Redmine
     include TicketMaster::Provider::Base
+    PROJECT_API = RedmineAPI::Project
+    TICKET_API = RedmineAPI::Issue
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Yoursystem.new(auth)
     def self.new(auth = {})
@@ -17,5 +19,6 @@ module TicketMaster::Provider
       end
       RedmineAPI.authenticate(auth.server, auth.username, auth.password)
     end
+
   end
 end
