@@ -12,10 +12,10 @@ module TicketMaster::Provider
           object = object.first
           @system_data = {:client => object}
           unless object.is_a? Hash
-            hash = {:repository => object.name,
+            hash = {:repository => object.id,
               :description => object.description,
-              :name => object.id,
-              :id => object.id}
+              :subject => object.subject,
+              :status => object.status}
           else
             hash = object
           end
@@ -40,14 +40,11 @@ module TicketMaster::Provider
         self[:id].to_i
       end
 
-      def self.open(project_id, *options)
-        opt = options.first[:params]
-        opt.merge!(:name => project_id)
-        begin
-        self.new API.new(opt.merge!(:custom_field_values => opt ))
-        rescue
-          self.new API.find(:all).last
-        end
+      def self.create(*options)
+        issue = API.new(options.first.merge!(:status => 'New'))
+        ticket = self.new issue
+        issue.save
+        ticket
       end
 
     end
