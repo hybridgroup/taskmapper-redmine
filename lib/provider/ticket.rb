@@ -13,17 +13,7 @@ module TicketMaster::Provider
           @system_data = {:client => object}
           unless object.is_a? Hash
             hash = {:repository => object.name,
-              :tracker => object.tracker,
-              :status => object.status,
-              :priority => object.priority,
-              :author => object.author,
-              :category => object.category,
-              :subject => object.subject,
               :description => object.description,
-              :start_date => object.start_date,
-              :due_date => object.due_date,
-              :done_ratio => object.done_ratio,
-              :estimated_hours => object.estimated_hours,
               :name => object.id,
               :id => object.id}
           else
@@ -51,37 +41,13 @@ module TicketMaster::Provider
       end
 
       def self.open(project_id, *options)
-        data = Hashie::Mash.new options.first
-        self.new API.new(:project_id => project_id, 
-                :repository => project_id,
-              :tracker => data.tracker,
-              :status => data.status,
-              :priority => data.priority,
-              :author => data.author,
-              :category => data.category,
-              :subject => data.subject,
-              :description => data.description,
-              :start_date => data.start_date,
-              :due_date => data.due_date,
-              :done_ratio => data.done_ratio,
-              :estimated_hours => data.estimated_hours,
-              :name => data.id,
-              :id => data.id)
-
-      end
-
-      def comments 
-        warn "Redmine does not have comments in it's API"
-        []
-      end
-
-      def comment
-        warn "Redmine does not have comments in it's API"
-        nil
-      end
-
-      def comment!
-        warn "Redmine does not have comments in it's API"
+        opt = options.first[:params]
+        opt.merge!(:name => project_id)
+        begin
+        self.new API.new(opt.merge!(:custom_field_values => opt ))
+        rescue
+          self.new API.find(:all).last
+        end
       end
 
     end

@@ -9,8 +9,8 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
       mock.get '/projects/test-repo12.xml', headers, fixture_for('projects/test-repo12'), 200
       mock.get '/issues.xml', headers, fixture_for('issues'), 200
-      mock.get '/issues/4326.xml', headers, fixture_for('issues/4326'), 200
-      mock.put '/issues/4326.xml', headers_post_put, '', 200
+      mock.get '/issues/1.xml', headers, fixture_for('issues/1'), 200
+      mock.put '/issues/1.xml', headers_post_put, '', 200
     end
   end
 
@@ -26,17 +26,17 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to load all tickets based on an array of id's" do
-    @tickets = @project.tickets([4326])
+    @tickets = @project.tickets([1])
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == 4326
+    @tickets.first.id.should == 1
   end
 
   it "should be able to load all tickets based on attributes" do
-    @tickets = @project.tickets(:id => 4326)
+    @tickets = @project.tickets(:id => 1)
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == 4326
+    @tickets.first.id.should == 1
   end
 
   it "should return the ticket class" do
@@ -44,19 +44,19 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to load a single ticket" do
-    @ticket = @project.ticket(4326)
+    @ticket = @project.ticket(1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.id.should == 4326
+    @ticket.id.should == 1
   end
 
   it "shoule be able to load a single ticket based on attributes" do
-    @ticket = @project.ticket(:id => 4326)
+    @ticket = @project.ticket(:id => 1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.id.should == 4326
+    @ticket.id.should == 1
   end
 
   it "should be able to update and save a ticket" do 
-    @ticket = @project.ticket(4326)
+    @ticket = @project.ticket(1)
     @ticket.description = 'hello'
     @ticket.save.should == true
   end
