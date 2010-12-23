@@ -28,7 +28,6 @@ module RedmineAPI
   end
 
   class Issue < Base
-    self.format = :json
     def name
       self.id
     end
