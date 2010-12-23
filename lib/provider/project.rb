@@ -29,10 +29,12 @@ module TicketMaster::Provider
       def tickets(*options)
         if options.first.is_a? Hash
           options[0].merge!(:params => {:project_id => id})
+          super(*options)
         elsif options.empty?
-          RedmineAPI::Issue.find(:all, :params => {:project_id => id})
+          issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
+        else
+          super(*options)
         end
-        super(*options)
       end
 
     end
