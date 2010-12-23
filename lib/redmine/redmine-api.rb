@@ -28,12 +28,14 @@ module RedmineAPI
   end
 
   class Issue < Base
+    self.format = :json
     def name
       self.id
     end
   end
 
   class Project < Base
+    self.format = :xml
     def tickets(options = {})
       Issue.find(:all, :params => options.update(:project_id => id)) 
     end

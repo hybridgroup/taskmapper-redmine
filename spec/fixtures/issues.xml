@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues type="array">
+<issues type="array" count="1">
   <issue>
     <id>4326</id>
     <project name="Redmine" id="1"/>
