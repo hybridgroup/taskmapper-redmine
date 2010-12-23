@@ -26,6 +26,15 @@ module TicketMaster::Provider
         self[:identifier]
       end
 
+      def tickets(*options)
+        if options.first.is_a? Hash
+          options[0].merge!(:params => {:project_id => id})
+        elsif options.empty?
+          RedmineAPI::Issue.find(:all, :params => {:project_id => id})
+        end
+        super(*options)
+      end
+
     end
   end
 end

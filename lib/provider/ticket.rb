@@ -12,7 +12,11 @@ module TicketMaster::Provider
           object = object.first
           @system_data = {:client => object}
           unless object.is_a? Hash
+<<<<<<< HEAD
             hash = {:repository => object.project_id,
+=======
+            hash = {:repository => object.id,
+>>>>>>> ticket-creation
               :description => object.description,
               :subject => object.subject,
               :status => object.status}
@@ -40,13 +44,9 @@ module TicketMaster::Provider
         self[:id].to_i
       end
 
-      def project_id
-        self[:project_id].to_i
-      end
-
       def self.create(*options)
         issue = API.new(options.first.merge!(:status => 'New'))
-        ticket = self.new issue 
+        ticket = self.new issue
         issue.save
         ticket
       end
