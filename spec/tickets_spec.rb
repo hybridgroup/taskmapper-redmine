@@ -4,13 +4,14 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   before(:all) do
     headers = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Accept' => 'application/xml'}
     headers_post_put = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Content-Type' => 'application/xml'}
-    @project_id = 'test-repo12'
+    @project_id = 1
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
-      mock.get '/projects/test-repo12.xml', headers, fixture_for('projects/test-repo12'), 200
+      mock.get '/projects/1.xml', headers, fixture_for('projects/test-repo12'), 200
       mock.get '/issues.xml', headers, fixture_for('issues'), 200
       mock.get '/issues/1.xml', headers, fixture_for('issues/1'), 200
-      mock.put '/issues/1.xml', headers_post_put, '', 200
+      mock.put '/issues/0.xml', headers_post_put, '', 200
+      mock.post '/issues.xml', headers_post_put, '', 200
     end
   end
 
@@ -29,14 +30,14 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @tickets = @project.tickets([1])
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == 1
+    @tickets.first.subject.should == 'test-issue'
   end
 
   it "should be able to load all tickets based on attributes" do
     @tickets = @project.tickets(:id => 1)
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == 1
+    @tickets.first.subject.should == 'test-issue'
   end
 
   it "should return the ticket class" do
@@ -46,13 +47,13 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   it "should be able to load a single ticket" do
     @ticket = @project.ticket(1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.id.should == 1
+    @ticket.subject.should == 'test-issue'
   end
 
   it "shoule be able to load a single ticket based on attributes" do
     @ticket = @project.ticket(:id => 1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.id.should == 1
+    @ticket.subject.should == 'test-issue'
   end
 
   it "should be able to update and save a ticket" do 
@@ -62,7 +63,7 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to create a ticket" do 
-    @ticket = @project.ticket!(:title => 'Ticket #12', :description => 'Body')
+    @ticket = @project.ticket!(:subject => 'Ticket #12', :description => 'Body')
     @ticket.should be_an_instance_of(@klass)
   end
 

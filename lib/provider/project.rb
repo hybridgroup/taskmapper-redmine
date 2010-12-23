@@ -19,15 +19,11 @@ module TicketMaster::Provider
       end
 
       def id
-        self[:identifier]
+        self[:id]
       end
 
-      def name
+      def identifier
         self[:identifier]
-      end
-
-      def ticket!(*options)
-        TicketMaster::Provider::Redmine::Ticket.open(name, {:params => options.first})
       end
 
     end
