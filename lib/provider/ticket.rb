@@ -12,11 +12,7 @@ module TicketMaster::Provider
           object = object.first
           @system_data = {:client => object}
           unless object.is_a? Hash
-<<<<<<< HEAD
-            hash = {:repository => object.project_id,
-=======
             hash = {:repository => object.id,
->>>>>>> ticket-creation
               :description => object.description,
               :subject => object.subject,
               :status => object.status}
