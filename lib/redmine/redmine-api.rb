@@ -22,23 +22,21 @@ module RedmineAPI
   end
 
   class Base < ActiveResource::Base
+    self.format = :xml
     def self.inherited(base)
       RedmineAPI.resources << base
     end
   end
 
   class Issue < Base
-    self.format = :json
+    attr_reader :project_id
+
     def name
-      self.id
+      self.subject
     end
   end
 
   class Project < Base
-    self.format = :xml
-    def tickets(options = {})
-      Issue.find(:all, :params => options.update(:project_id => id)) 
-    end
   end
 
 end

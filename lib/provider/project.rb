@@ -19,15 +19,22 @@ module TicketMaster::Provider
       end
 
       def id
+        self[:id]
+      end
+
+      def identifier
         self[:identifier]
       end
 
-      def name
-        self[:identifier]
-      end
-
-      def ticket!(*options)
-        TicketMaster::Provider::Redmine::Ticket.open(name, {:params => options.first})
+      def tickets(*options)
+        if options.first.is_a? Hash
+          options[0].merge!(:params => {:project_id => id})
+          super(*options)
+        elsif options.empty?
+          issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
+        else
+          super(*options)
+        end
       end
 
     end
