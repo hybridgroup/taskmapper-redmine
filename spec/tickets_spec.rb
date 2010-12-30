@@ -31,14 +31,14 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @tickets = @project.tickets([1])
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.subject.should == 'test-issue'
+    @tickets.first.title.should == 'test-issue'
   end
 
   it "should be able to load all tickets based on attributes" do
     @tickets = @project.tickets(:id => 1)
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.subject.should == 'test-issue'
+    @tickets.first.title.should == 'test-issue'
   end
 
   it "should return the ticket class" do
@@ -48,13 +48,13 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   it "should be able to load a single ticket" do
     @ticket = @project.ticket(1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.subject.should == 'test-issue'
+    @ticket.title.should == 'test-issue'
   end
 
   it "shoule be able to load a single ticket based on attributes" do
     @ticket = @project.ticket(:id => 1)
     @ticket.should be_an_instance_of(@klass)
-    @ticket.subject.should == 'test-issue'
+    @ticket.title.should == 'test-issue'
   end
 
   it "should be able to update and save a ticket" do 
