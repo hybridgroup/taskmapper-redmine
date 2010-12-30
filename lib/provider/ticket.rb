@@ -47,6 +47,21 @@ module TicketMaster::Provider
         ticket
       end
 
+      def comments
+        warn "Redmine doesn't support comments"
+        []
+      end
+
+      def comment
+        warn "Redmine doesn't support comments"
+        nil
+      end
+
+      def comment!
+        warn "Redmine doesn't support comments"
+        []
+      end
+
     end
   end
 end
