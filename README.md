@@ -4,7 +4,7 @@ This is a provider for [ticketmaster](http://ticketrb.com). It provides interope
 
 # Usage and Examples
 
-First we have to instantiate a new ticketmaster instance:
+First we have to instantiate a new ticketmaster instance, your redmine installation should have api access enable:
     redmine = TicketMaster.new(:redmine, {:server => 'http://redmine-server', :username => "foo", :password => "bar"})
 
 If you do not pass in the server, username and password, you won't get any information.
