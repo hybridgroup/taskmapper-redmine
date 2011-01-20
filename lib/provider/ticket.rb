@@ -14,8 +14,10 @@ module TicketMaster::Provider
           unless object.is_a? Hash
             hash = {:repository => object.id,
               :description => object.description,
-              :subject => object.subject,
-              :status => object.status}
+              :title => object.subject,
+              :status => object.status,
+              :priority => object.priority,
+              :project_id => object.id}
           else
             hash = object
           end
@@ -41,7 +43,7 @@ module TicketMaster::Provider
       end
 
       def self.create(*options)
-        issue = API.new(options.first.merge!(:status => 'New'))
+        issue = API.new(options.first.merge!(:status => 'New', :priority => 'Normal'))
         ticket = self.new issue
         issue.save
         ticket
