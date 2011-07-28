@@ -6,7 +6,7 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       # declare needed overloaded methods here
       API = RedmineAPI::Project      
-      
+
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
@@ -28,14 +28,14 @@ module TicketMaster::Provider
 
       def tickets(*options)
         begin 
-        if options.first.is_a? Hash
-          options[0].merge!(:params => {:project_id => id})
-          super(*options)
-        elsif options.empty?
-          issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
-        else
-          super(*options)
-        end
+          if options.first.is_a? Hash
+            options[0].merge!(:params => {:project_id => id})
+            super(*options)
+          elsif options.empty?
+            issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
+          else
+            super(*options)
+          end
         rescue
           []
         end

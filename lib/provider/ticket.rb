@@ -25,6 +25,22 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find(*options)
+        begin 
+          if options.first.is_a? Hash
+            options[0].merge!(:params => {:project_id => id})
+            super(*options)
+          elsif options.empty?
+            issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
+          else
+            super(*options)
+          end
+        rescue
+          []
+        end
+      end
+
+
       def self.find_by_id(project_id, ticket_id)
         self.new API.find(ticket_id)
       end

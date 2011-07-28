@@ -20,5 +20,8 @@ module TicketMaster::Provider
       RedmineAPI.authenticate(auth.server, auth.username, auth.password)
     end
 
+    def valid?
+     RedmineAPI::Project.find(:all).size >= 0 
+    end
   end
 end
