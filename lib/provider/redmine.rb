@@ -21,7 +21,11 @@ module TicketMaster::Provider
     end
 
     def valid?
-     RedmineAPI::Project.find(:all).size >= 0 
+      begin
+        RedmineAPI::Project.find(:all).size >= 0 
+      rescue
+        false
+      end
     end
   end
 end
