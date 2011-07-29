@@ -7,37 +7,37 @@ module TicketMaster::Provider
     class Ticket < TicketMaster::Provider::Base::Ticket
       # declare needed overloaded methods here
 
-      def initialize(*object)
-        if object.first
-          object = object.first
-          @system_data = {:client => object}
-          unless object.is_a? Hash
-            hash = {:repository => object.id,
-              :description => object.description,
-              :title => object.subject,
-              :status => object.status,
-              :priority => object.priority,
-              :project_id => object.id}
-          else
-            hash = object
-          end
-          super hash
-        end
+
+      def created_at
+        self[:created_on]
       end
 
-      def self.find(*options)
-        begin 
-          if options.first.is_a? Hash
-            options[0].merge!(:params => {:project_id => id})
-            super(*options)
-          elsif options.empty?
-            issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
-          else
-            super(*options)
-          end
-        rescue
-          []
-        end
+      def updated_at
+        self[:updated_on]
+      end
+
+      def title
+        self[:subject]
+      end
+
+      def project_id
+        self[:project].id.to_i
+      end
+
+      def status
+        self[:status].name
+      end
+
+      def priority
+        self[:priority].name
+      end
+
+      def requestor
+        self[:author].name
+      end
+
+      def assignee
+        self[:author].name
       end
 
 
