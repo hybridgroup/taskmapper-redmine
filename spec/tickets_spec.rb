@@ -51,12 +51,6 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @ticket.title.should == 'test-issue'
   end
 
-  it "shoule be able to load a single ticket based on attributes" do
-    @ticket = @project.ticket(:id => 1)
-    @ticket.should be_an_instance_of(@klass)
-    @ticket.title.should == 'test-issue'
-  end
-
   it "should be able to update and save a ticket" do 
     @ticket = @project.ticket(1)
     @ticket.description = 'hello'

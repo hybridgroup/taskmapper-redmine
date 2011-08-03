@@ -40,9 +40,25 @@ module TicketMaster::Provider
         self[:author].name
       end
 
+      def id
+        self[:id].to_i
+      end
+
+      def self.find(project_id, *options)
+        if options.first.is_a? Hash
+          options[0].merge!(:params => {:project_id => project_id})
+          super(*options)
+        elsif options.empty?
+          issues =  RedmineAPI::Issue.find(:all, :params => {:project_id => project_id}).collect { |issue| TicketMaster::Provider::Redmine::Ticket.new issue }
+        elsif options[0].first.is_a? Fixnum
+          self.find_by_id(project_id, options[0].first)
+        else
+          super(*options)
+        end
+      end
 
       def self.find_by_id(project_id, ticket_id)
-        self.new API.find(ticket_id)
+        self.new API.find(:first, :id => ticket_id)
       end
 
       def self.find_by_attributes(project_id, attributes = {})
@@ -54,9 +70,6 @@ module TicketMaster::Provider
         hash = {:repo => repo}.merge!(options)
       end
 
-      def id
-        self[:id].to_i
-      end
 
       def self.create(*options)
         issue = API.new(options.first.merge!(:status => 'New', :priority => 'Normal'))
