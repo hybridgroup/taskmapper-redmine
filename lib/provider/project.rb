@@ -33,7 +33,7 @@ module TicketMaster::Provider
       def ticket(*options)
         unless options.empty?
           Ticket.find(self.id, options)
-        else
+        else 
           TicketMaster::Provider::Redmine::Ticket
         end
       end
