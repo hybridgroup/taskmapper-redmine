@@ -11,7 +11,7 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
       mock.get '/issues.xml?project_id=1', headers, fixture_for('issues'), 200
       mock.get '/issues.xml', headers, fixture_for('issues'), 200
       mock.get '/issues/1.xml', headers, fixture_for('issues/1'), 200
-      mock.put '/issues/0.xml', headers_post_put, '', 200
+      mock.put '/issues/1.xml', headers_post_put, '', 200
       mock.post '/issues.xml', headers_post_put, '', 200
     end
   end
