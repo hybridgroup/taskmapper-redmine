@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Redmine::Project" do
-  before(:all) do
+  before(:each) do 
     headers = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Accept' => 'application/xml'}
     headers_post_put = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Content-Type' => 'application/xml'}
     @project_id = 'test-repo12'
@@ -11,9 +11,7 @@ describe "Ticketmaster::Provider::Redmine::Project" do
       mock.put '/projects/1.xml', headers_post_put, '', 200
       mock.post '/projects.xml', headers_post_put, '', 200
     end
-  end
-
-  before(:each) do 
+  
     @ticketmaster = TicketMaster.new(:redmine, {:server => 'http://demo.redmine.org/', :username => 'cored', :password => '123456'})
     @klass = TicketMaster::Provider::Redmine::Project
   end
