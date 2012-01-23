@@ -17,7 +17,7 @@ module RedmineAPI
     end
 
     def resources
-      @resources = []
+      @resources ||= []
     end
   end
 
