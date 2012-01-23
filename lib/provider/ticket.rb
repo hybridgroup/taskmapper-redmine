@@ -7,6 +7,25 @@ module TicketMaster::Provider
     class Ticket < TicketMaster::Provider::Base::Ticket
       # declare needed overloaded methods here
 
+      def initialize(*object) 
+        if object.first
+          object = object.first
+          unless object.is_a? Hash
+            hash = {:id => object.id.to_i,
+                    :title => object.subject,
+                    :created_at => object.created_on,
+                    :updated_at => object.updated_on,
+                    :project_id => object.project.id.to_i,
+                    :status => object.status.name,
+                    :priority => object.priority.name,
+                    :requestor => object.author.name,
+                    :assignee => object.author.name}
+          else
+            hash = object
+          end
+          super hash
+        end
+      end
 
       def created_at
         self[:created_on]
@@ -14,10 +33,6 @@ module TicketMaster::Provider
 
       def updated_at
         self[:updated_on]
-      end
-
-      def title
-        self[:subject]
       end
 
       def project_id

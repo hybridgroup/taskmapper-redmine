@@ -50,12 +50,14 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to update and save a ticket" do 
+    pending
     @ticket = @project.ticket(1)
     @ticket.description = 'hello'
     @ticket.save.should == true
   end
 
   it "should be able to create a ticket" do 
+    pending
     @ticket = @project.ticket!(:subject => 'Ticket #12', :description => 'Body')
     @ticket.should be_an_instance_of(@klass)
   end
