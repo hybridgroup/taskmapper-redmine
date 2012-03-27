@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "ticketmaster-redmine"
-  s.version = "0.2.7"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael George"]
-  s.date = "2012-03-15"
+  s.date = "2012-03-27"
   s.description = "Allows ticketmaster to interact with Your System."
   s.email = "rafael@hybridgroup.com"
   s.extra_rdoc_files = [
@@ -46,31 +46,31 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/hybridgroup/ticketmaster-redmine"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.19"
+  s.rubygems_version = "1.8.17"
   s.summary = "Ticketmaster Provider for Redmine"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ticketmaster>, ["~> 0.6.8"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_development_dependency(%q<simplecov>, ["~> 0.5.0"])
-      s.add_development_dependency(%q<rcov>, ["~> 1.0.0"])
+      s.add_runtime_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
+      s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
+      s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
-      s.add_dependency(%q<ticketmaster>, ["~> 0.6.8"])
-      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-      s.add_dependency(%q<simplecov>, ["~> 0.5.0"])
-      s.add_dependency(%q<rcov>, ["~> 1.0.0"])
+      s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_dependency(%q<rspec>, ["~> 2.8"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6"])
+      s.add_dependency(%q<simplecov>, ["~> 0.5"])
+      s.add_dependency(%q<rcov>, ["~> 1.0"])
     end
   else
-    s.add_dependency(%q<ticketmaster>, ["~> 0.6.8"])
-    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
-    s.add_dependency(%q<simplecov>, ["~> 0.5.0"])
-    s.add_dependency(%q<rcov>, ["~> 1.0.0"])
+    s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+    s.add_dependency(%q<rspec>, ["~> 2.8"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6"])
+    s.add_dependency(%q<simplecov>, ["~> 0.5"])
+    s.add_dependency(%q<rcov>, ["~> 1.0"])
   end
 end
 
