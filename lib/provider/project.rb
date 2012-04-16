@@ -44,18 +44,6 @@ module TicketMaster::Provider
         self[:identifier]
       end
 
-      def tickets(*options)
-        Ticket.find(self.id, options)
-      end
-
-      def ticket(*options)
-        unless options.empty?
-          Ticket.find(self.id, options)
-        else 
-          TicketMaster::Provider::Redmine::Ticket
-        end
-      end
-
     end
   end
 end
