@@ -7,23 +7,21 @@ module TicketMaster::Provider
     class Ticket < TicketMaster::Provider::Base::Ticket
       # declare needed overloaded methods here
 
-      def initialize(*object) 
-        if object.first
-          object = object.first
-          unless object.is_a? Hash
-            hash = {:id => object.id.to_i,
-                    :title => object.subject,
-                    :created_at => object.created_on,
-                    :updated_at => object.updated_on,
-                    :project_id => object.project.id.to_i,
-                    :status => object.status.name,
-                    :priority => object.priority.name,
-                    :requestor => object.author.name,
-                    :assignee => object.author.name}
-          else
-            hash = object
-          end
-          super hash
+      def initialize(*args)
+        first = args.first
+        case first
+          when Hash then super first
+          when RedmineAPI::Issue
+            super :id => first.id.to_i,
+              :title => first.subject,
+              :created_at => first.created_on,
+              :updated_at => first.updated_on,
+              :project_id => first.project.id.to_i,
+              :status => first.status.name,
+              :priority => first.priority.name,
+              :requestor => first.author.name,
+              :assignee => first.author.name
+          else raise ArgumentError.new
         end
       end
 
