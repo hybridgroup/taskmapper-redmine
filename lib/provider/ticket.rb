@@ -76,12 +76,22 @@ module TicketMaster::Provider
        hash = {:repo => repo}.merge!(options)
       end
 
-
-      def self.create(*options)
-        issue = API.new(options.first.merge!(:status => 'New', :priority => 'Normal'))
-        ticket = self.new issue
-        issue.save
-        ticket
+      def self.create(attributes)
+        ticket = self.new(attributes)
+        ticket if ticket.save
+      end
+      
+      def save
+        return update if id && !id.zero?
+        self.to_issue.save
+      end
+      
+      def to_issue
+        API.new.tap do |i|
+          i.subject = title,
+          i.description = description,
+          i.project_id = project_id
+        end
       end
 
       def comments
@@ -98,7 +108,17 @@ module TicketMaster::Provider
         warn "Redmine doesn't support comments"
         []
       end
-
+      
     end
+  end
+end
+
+#This is for debugging propouse
+class Net::HTTP
+  def send(*args)
+    p "<<< Net::HTTP#send(#{args.inspect}) >>>"
+    resp = super
+    p "<<< Response = #{resp.inspect} >>>"
+    resp
   end
 end
