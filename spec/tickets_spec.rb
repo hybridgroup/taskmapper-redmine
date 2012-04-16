@@ -57,7 +57,6 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to create a ticket" do 
-    pending
     @ticket = @project.ticket!(:subject => 'Ticket #12', :description => 'Body')
     @ticket.should be_an_instance_of(@klass)
   end
