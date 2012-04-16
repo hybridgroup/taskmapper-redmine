@@ -43,7 +43,6 @@ module TicketMaster::Provider
       def identifier
         self[:identifier]
       end
-
     end
   end
 end

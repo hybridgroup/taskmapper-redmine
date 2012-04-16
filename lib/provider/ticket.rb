@@ -55,12 +55,12 @@ module TicketMaster::Provider
       end
 
       def self.find_by_attributes(project_id, attributes = {})
-       issues = API.find(:all, build_attributes(project_id, attributes))
+       issues = API.find(:all, attributes_for_request(project_id, attributes))
        issues.collect { |issue| self.new issue }
       end
 
-      def self.build_attributes(repo, options)
-       hash = {:repo => repo}.merge!(options)
+      def self.attributes_for_request(project_id, options)
+       hash = {:params => {:project_id => project_id}}.merge!(options)
       end
 
       def self.create(attributes)
