@@ -8,9 +8,9 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
 
       def initialize(*args)
-        case args[0]
-          when Hash then super args[0]
-          when RedmineAPI::Issue then super args[0].to_ticket_hash
+        case args.first
+          when Hash then super args.first
+          when RedmineAPI::Issue then super args.first.to_ticket_hash
           else raise ArgumentError.new
         end
       end
