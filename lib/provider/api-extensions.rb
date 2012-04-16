@@ -1,3 +1,4 @@
+#Reopening class to add ticket master espesific behavior without mixing it with RadmineAPI
 class RedmineAPI::Issue
   def to_ticket_hash
     return  :id => id.to_i,
