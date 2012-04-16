@@ -57,7 +57,7 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
   end
 
   it "should be able to create a ticket" do 
-    @ticket = @project.ticket!(:ticket => 'Ticket #12', :description => 'Body')
+    @ticket = @project.ticket!(:title => 'Ticket #12', :description => 'Body')
     @ticket.should be_an_instance_of(@klass)
     @ticket.project_id.should_not be_nil
   end
