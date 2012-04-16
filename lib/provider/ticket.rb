@@ -8,21 +8,14 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
 
       def initialize(*args)
-        first = args.first
-        case first
-          when Hash then super first
-          when RedmineAPI::Issue
-            super :id => first.id.to_i,
-              :title => first.subject,
-              :created_at => first.created_on,
-              :updated_at => first.updated_on,
-              :project_id => first.project.id.to_i,
-              :status => first.status.name,
-              :priority => first.priority.name,
-              :requestor => first.author.name,
-              :assignee => first.author.name
+        case args[0]
+          when Hash then super args[0]
+          when RedmineAPI::Issue then super args[0].to_ticket_hash
           else raise ArgumentError.new
         end
+      end
+      
+      def self.copy(issue_hash, ticket_hash)
       end
 
       def created_at
