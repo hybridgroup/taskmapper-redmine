@@ -7,12 +7,10 @@ module RedmineAPI
   class Error < StandardError; end
 
   class << self
-    def authenticate(server, username, password)
-      @username = username
-      @password = password
+    attr_reader :token
+    def authenticate(server, token)
+      @token = token
       @server = server
-      self::Base.user = username
-      self::Base.password = password
       self::Base.site = server
     end
 
@@ -25,6 +23,10 @@ module RedmineAPI
     self.format = :xml
     def self.inherited(base)
       RedmineAPI.resources << base
+    end
+
+    def self.headers
+      {"X-Redmine-API-Key" => RedmineAPI.token}
     end
   end
 

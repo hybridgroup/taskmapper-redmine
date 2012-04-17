@@ -2,8 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Redmine::Ticket" do
   before(:each) do 
-    headers = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Accept' => 'application/xml'}
-    headers_post_put = {'Authorization' => 'Basic Y29yZWQ6MTIzNDU2', 'Content-Type' => 'application/xml'}
+    headers = {'X-Redmine-API-Key' => 'abcdefghijk', 'Accept' => 'application/xml'}
+    headers_post_put = {'X-Redmine-API-Key' => 'abcdefghijk', 'Content-Type' => 'application/xml'}
     @project_id = 1
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
@@ -15,7 +15,7 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
       mock.post '/issues.xml', headers_post_put, '', 200
     end
   
-    @ticketmaster = TicketMaster.new(:redmine, {:server => 'http://demo.redmine.org/', :username => 'cored', :password => '123456'})
+    @ticketmaster = TicketMaster.new :redmine, :server => 'http://demo.redmine.org/', :token => 'abcdefghijk'
     @project = @ticketmaster.project(@project_id)
     @klass = TicketMaster::Provider::Redmine::Ticket
   end
