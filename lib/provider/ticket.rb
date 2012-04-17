@@ -27,7 +27,7 @@ module TicketMaster::Provider
       end
 
       def project_id
-        self[:project].id.to_i
+        self[:project_id]
       end
 
       def status
