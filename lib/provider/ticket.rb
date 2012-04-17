@@ -69,17 +69,20 @@ module TicketMaster::Provider
       end
       
       def save
-        return update if id && !id.zero?
-        self.to_issue.save
+        new? ? to_issue.save : update
+      end
+      
+      def new?
+        id.nil? || id.zero?
       end
       
       def to_issue
         API.new.tap do |i|
           i.subject = title
-          i.description = description
           i.project_id = project_id
-          i.priority_id = priority
-        end
+          i.description = description if desciprtion
+          i.priority_id = priority if priority
+        end 
       end
 
       def comments
