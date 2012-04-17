@@ -35,7 +35,7 @@ module TicketMaster::Provider
       end
 
       def priority
-        self[:priority].name
+        self[:priority]
       end
 
       def requestor
@@ -75,9 +75,10 @@ module TicketMaster::Provider
       
       def to_issue
         API.new.tap do |i|
-          i.subject = title,
-          i.description = description,
+          i.subject = title
+          i.description = description
           i.project_id = project_id
+          i.priority_id = priority
         end
       end
 
