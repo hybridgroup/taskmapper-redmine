@@ -31,11 +31,6 @@ module RedmineAPI
   end
 
   class Issue < Base
-    attr_reader :project_id
-
-    def name
-      self.subject
-    end
   end
 
   class Project < Base
