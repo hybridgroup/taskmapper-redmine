@@ -73,7 +73,13 @@ module TicketMaster::Provider
       end
       
       def update
-        API.find(id).update_with(self).save
+        find_issue.update_with(self).save
+      end
+      
+      def find_issue
+        issue = API.find id
+        raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
+        issue
       end
       
       def new?
