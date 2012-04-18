@@ -8,6 +8,7 @@ class RedmineAPI::Issue
       :project_id => project.id.to_i,
       :status => status.name,
       :priority => priority.name,
+      :priority_id => priority.id.to_i, 
       :requestor => author.name,
       :assignee => author.name
   end
@@ -16,6 +17,7 @@ class RedmineAPI::Issue
     self.subject = ticket.title
     self.project_id = ticket.project_id 
     self.description = ticket.description if ticket.description
+    self.priority_id = ticket.priority_id if ticket.priority_id
     self
   end
 end
