@@ -72,22 +72,8 @@ module TicketMaster::Provider
         new? ? to_issue.save : update
       end
       
-      def update
-        find_issue.update_with(self).save
-      end
-      
-      def find_issue
-        issue = API.find id
-        raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
-        issue
-      end
-      
       def new?
         id.nil? || id.zero?
-      end
-      
-      def to_issue
-        API.new.update_with(self)
       end
 
       def comments
@@ -105,6 +91,20 @@ module TicketMaster::Provider
         []
       end
       
+      private
+        def find_issue
+          issue = API.find id
+          raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
+          issue
+        end
+        
+        def update
+          find_issue.update_with(self).save
+        end
+        
+        def to_issue
+          API.new.update_with(self)
+        end
     end
   end
 end
