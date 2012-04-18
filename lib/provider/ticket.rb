@@ -69,13 +69,9 @@ module TicketMaster::Provider
       end
       
       def save
-        new? ? to_issue.save : update
+        to_issue.new? ? to_issue.save : update
       end
       
-      def new?
-        id.nil? || id.zero?
-      end
-
       def comments
         warn "Redmine doesn't support comments"
         []
@@ -93,7 +89,7 @@ module TicketMaster::Provider
       
       private
         def find_issue
-          issue = API.find id
+          issue = API.find id 
           raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
           issue
         end
