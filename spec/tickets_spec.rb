@@ -49,8 +49,7 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
     @ticket.title.should == 'test-issue'
   end
 
-  it "should be able to update and save a ticket" do 
-    pending
+  it "should be able to update and save a ticket" do
     @ticket = @project.ticket(1)
     @ticket.description = 'hello'
     @ticket.save.should == true
