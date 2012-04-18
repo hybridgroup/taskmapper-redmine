@@ -13,10 +13,10 @@ class RedmineAPI::Issue
   end
   
   def update_with(ticket)
-    subject = ticket.title
-    project_id = ticket.project_id
-    description = ticket.description if ticket.description
-    priority_id = ticket.priority if ticket.priority
+    self.subject = ticket.title
+    self.project_id = ticket.project_id
+    self.description = ticket.description if ticket.description
+    self.priority_id = ticket.priority if ticket.priority
     self
   end
 end
