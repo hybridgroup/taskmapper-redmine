@@ -11,4 +11,12 @@ class RedmineAPI::Issue
             :requestor => author.name,
             :assignee => author.name
   end
+  
+  def update_with(ticket)
+    subject = ticket.title
+    project_id = ticket.project_id
+    description = ticket.description if ticket.description
+    priority_id = ticket.priority if ticket.priority
+    self
+  end
 end
