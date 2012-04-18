@@ -14,9 +14,6 @@ module TicketMaster::Provider
           else raise ArgumentError.new
         end
       end
-      
-      def self.copy(issue_hash, ticket_hash)
-      end
 
       def created_at
         self[:created_on]
@@ -35,9 +32,9 @@ module TicketMaster::Provider
       end
 
       def priority
-        self[:priority]
+        self[:priority].name
       end
-
+      
       def requestor
         self[:author].name
       end
@@ -48,6 +45,10 @@ module TicketMaster::Provider
 
       def id
         self[:id].to_i
+      end
+      
+      def description
+        self[:description]
       end
 
       def self.find_by_id(project_id, ticket_id)
@@ -105,6 +106,7 @@ module TicketMaster::Provider
         def to_issue
           API.new.update_with(self)
         end
+
     end
   end
 end
