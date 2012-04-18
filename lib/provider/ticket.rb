@@ -89,7 +89,7 @@ module TicketMaster::Provider
       
       private
         def find_issue
-          issue = API.find id 
+          issue = API.find id, :params => {:project_id => self.project_id}
           raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
           issue
         end
