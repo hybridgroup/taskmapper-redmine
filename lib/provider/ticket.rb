@@ -105,17 +105,6 @@ module TicketMaster::Provider
         def to_issue
           API.new.update_with(self)
         end
-      
-      #This is for debugging propouse
-      class Net::HTTP
-        def send(*args)
-          p "<<< Net::HTTP#send(#{args.inspect}) >>>"
-          resp = super
-          p "<<< Response = #{resp.inspect} >>>"
-          resp
-        end
-      end
-
     end
   end
 end
