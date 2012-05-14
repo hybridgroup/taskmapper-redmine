@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Redmine
-    # Project class for ticketmaster-yoursystem
+    # Project class for taskmapper-yoursystem
     # 
     # 
-    class Project < TicketMaster::Provider::Base::Project
+    class Project < TaskMapper::Provider::Base::Project
       # declare needed overloaded methods here
       API = RedmineAPI::Project      
 

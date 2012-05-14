@@ -1,1 +1,1 @@
-rvm 1.8.7@ticketmaster-redmine --create
+rvm 1.9.2@taskmapper-redmine --create

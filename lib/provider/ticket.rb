@@ -1,10 +1,10 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Redmine
-    # Ticket class for ticketmaster-yoursystem
+    # Ticket class for taskmapper-yoursystem
     #
     API = RedmineAPI::Issue
 
-    class Ticket < TicketMaster::Provider::Base::Ticket
+    class Ticket < TaskMapper::Provider::Base::Ticket
       # declare needed overloaded methods here
 
       def initialize(*args)
@@ -91,7 +91,7 @@ module TicketMaster::Provider
       private
         def find_issue
           issue = API.find id, :params => {:project_id => self.project_id}
-          raise TicketMaster::Exception.new "Ticket with #{id} was not found" unless issue
+          raise TaskMapper::Exception.new "Ticket with #{id} was not found" unless issue
           issue
         end
         

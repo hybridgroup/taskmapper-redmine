@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Ticketmaster::Provider::Redmine" do
+describe TaskMapper::Provider::Redmine do
 
   before :each do 
     headers = {'Authorization' => 'Basic Y29yZWQ6YWZkZA==', 'Accept' => 'application/xml'}
@@ -10,9 +10,9 @@ describe "Ticketmaster::Provider::Redmine" do
   end
 
   it "should be able to instantiate a new instance" do
-    ticketmaster = TicketMaster.new(:redmine, :server => 'http://redmine.server', :token => 'kdkjkladkaldj')
-    ticketmaster.should be_an_instance_of(TicketMaster)
-    ticketmaster.should be_a_kind_of(TicketMaster::Provider::Redmine)
+    taskmapper = TaskMapper.new(:redmine, :server => 'http://redmine.server', :token => 'kdkjkladkaldj')
+    taskmapper.should be_an_instance_of(TaskMapper)
+    taskmapper.should be_a_kind_of(TaskMapper::Provider::Redmine)
   end
 
 end

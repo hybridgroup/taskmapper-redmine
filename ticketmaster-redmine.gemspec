@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "ticketmaster-redmine"
+  s.name = "taskmapper-redmine"
   s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael George"]
   s.date = "2012-04-19"
-  s.description = "Allows ticketmaster to interact with Your System."
+  s.description = "Allows taskmapper to interact with Your System."
   s.email = "rafael@hybridgroup.com"
   s.extra_rdoc_files = [
     "LICENSE",
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
     "lib/provider/redmine.rb",
     "lib/provider/ticket.rb",
     "lib/redmine/redmine-api.rb",
-    "lib/ticketmaster-redmine.rb",
+    "lib/taskmapper-redmine.rb",
     "spec/comments_spec.rb",
     "spec/fixtures/issues.xml",
     "spec/fixtures/issues/1.xml",
@@ -41,33 +41,33 @@ Gem::Specification.new do |s|
     "spec/projects_spec.rb",
     "spec/spec.opts",
     "spec/spec_helper.rb",
-    "spec/ticketmaster-redmine_spec.rb",
+    "spec/taskmapper-redmine_spec.rb",
     "spec/tickets_spec.rb",
-    "ticketmaster-redmine.gemspec"
+    "taskmapper-redmine.gemspec"
   ]
-  s.homepage = "http://github.com/hybridgroup/ticketmaster-redmine"
+  s.homepage = "http://github.com/hybridgroup/taskmapper-redmine"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
-  s.summary = "Ticketmaster Provider for Redmine"
+  s.summary = "taskmapper Provider for Redmine"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ticketmaster>, ["~> 0.7.0"])
+      s.add_runtime_dependency(%q<taskmapper>, ["~> 0.7.0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
     else
-      s.add_dependency(%q<ticketmaster>, ["~> 0.7.0"])
+      s.add_dependency(%q<taskmapper>, ["~> 0.7.0"])
       s.add_dependency(%q<rspec>, ["~> 2.8"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_dependency(%q<rcov>, ["~> 1.0"])
     end
   else
-    s.add_dependency(%q<ticketmaster>, ["~> 0.7.0"])
+    s.add_dependency(%q<taskmapper>, ["~> 0.7.0"])
     s.add_dependency(%q<rspec>, ["~> 2.8"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<simplecov>, ["~> 0.5"])

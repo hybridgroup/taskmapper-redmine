@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Ticketmaster::Provider::Redmine::Ticket" do
+describe TaskMapper::Provider::Redmine::Ticket do
   before(:each) do 
     headers = {'X-Redmine-API-Key' => 'abcdefghijk', 'Accept' => 'application/xml'}
     headers_post_put = {'X-Redmine-API-Key' => 'abcdefghijk', 'Content-Type' => 'application/xml'}
@@ -15,9 +15,9 @@ describe "Ticketmaster::Provider::Redmine::Ticket" do
       mock.post '/issues.xml', headers_post_put, '', 200
     end
   
-    @ticketmaster = TicketMaster.new :redmine, :server => 'http://demo.redmine.org/', :token => 'abcdefghijk'
-    @project = @ticketmaster.project(@project_id)
-    @klass = TicketMaster::Provider::Redmine::Ticket
+    @taskmapper = TaskMapper.new :redmine, :server => 'http://demo.redmine.org/', :token => 'abcdefghijk'
+    @project = @taskmapper.project(@project_id)
+    @klass = TaskMapper::Provider::Redmine::Ticket
   end
 
   it "should be able to load all tickets" do 
