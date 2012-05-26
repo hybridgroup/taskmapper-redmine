@@ -8,9 +8,9 @@ describe TaskMapper::Provider::Redmine::Ticket do
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/projects.xml', headers, fixture_for('projects'), 200
       mock.get '/projects/1.xml', headers, fixture_for('projects/test-repo12'), 200
-      mock.get '/issues.xml?project_id=1', headers, fixture_for('issues'), 200
+      mock.get '/issues.xml?include=journals&project_id=1', headers, fixture_for('issues'), 200
       mock.get '/issues.xml', headers, fixture_for('issues'), 200
-      mock.get '/issues/1.xml', headers, fixture_for('issues/1'), 200
+      mock.get '/issues/1.xml?include=journals', headers, fixture_for('issues/1'), 200
       mock.put '/issues/1.xml', headers_post_put, '', 200
       mock.post '/issues.xml', headers_post_put, '', 200
     end

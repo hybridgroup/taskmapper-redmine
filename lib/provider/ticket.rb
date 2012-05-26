@@ -52,7 +52,7 @@ module TaskMapper::Provider
       end
 
       def self.find_by_id(project_id, ticket_id)
-       self.new API.find(:first, :id => ticket_id)
+       self.new API.find(ticket_id)
       end
 
       def self.find_by_attributes(project_id, attributes = {})
@@ -71,21 +71,6 @@ module TaskMapper::Provider
       
       def save
         to_issue.new? ? to_issue.save : update
-      end
-      
-      def comments
-        warn "Redmine doesn't support comments"
-        []
-      end
-
-      def comment
-        warn "Redmine doesn't support comments"
-        nil
-      end
-
-      def comment!
-        warn "Redmine doesn't support comments"
-        []
       end
       
       private

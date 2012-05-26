@@ -31,6 +31,19 @@ module RedmineAPI
   end
 
   class Issue < Base
+    def self.find(*arguments)
+      scope   = arguments.slice!(0)
+      options = arguments.slice!(0) || {}
+      # By including journals, we can get Notes aka Comments
+      # RedmineAPI::Issue.find(2180, :params => {:include => 'journals'})
+      get_comments = {:include => 'journals'}
+      if options[:params].nil?
+        options[:params] = get_comments
+      else
+        options[:params].merge!(get_comments)
+      end
+      super scope, options
+    end
   end
 
   class Project < Base
