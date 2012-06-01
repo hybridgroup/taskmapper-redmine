@@ -29,6 +29,7 @@ describe TaskMapper::Provider::Redmine::Comment do
 
   it "should be able to load all comments" do
     comments = @ticket.comments
+    comments.size.should eq(2)
     comments.should be_an_instance_of(Array)
     comments.first.should be_an_instance_of(klass)
   end

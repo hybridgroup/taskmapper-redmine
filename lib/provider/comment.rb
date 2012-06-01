@@ -32,8 +32,9 @@ module TaskMapper::Provider
       end
 
       def self.search(ticket_id)
-        API.find(ticket_id).journals.collect do |journal|
-          self.new(ticket_id, journal)
+        API.find(ticket_id).journals.inject([]) do |arr, journal|
+          arr << self.new(ticket_id, journal) if journal.notes.present?
+          arr
         end
       end
 
