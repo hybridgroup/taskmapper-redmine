@@ -39,13 +39,16 @@ module TaskMapper::Provider
       end
 
       def self.create(*options)
-        first = options.first
-        ticket_id = first.delete(:ticket_id) || first.delete('ticket_id')
-        notes = first.delete(:body) || first.delete('body')
-        journal = API.find(ticket_id)
-        journal.notes = notes
+        attributes = options.first
+        self.new(attributes[:ticket_id], create_journal_for_issue(attributes))
+      end
+
+      private 
+      def self.create_journal_for_issue(attributes)
+        journal = API.find(attributes[:ticket_id])
+        journal.notes = attributes[:body]
         journal.save
-        self.new(ticket_id, journal)
+        journal
       end
     end
   end
