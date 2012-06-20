@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-redmine"
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael George"]
-  s.date = "2012-05-14"
+  s.date = "2012-06-20"
   s.description = "Allows taskmapper to interact with Your System."
   s.email = "rafael@hybridgroup.com"
   s.extra_rdoc_files = [
@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/taskmapper-redmine_spec.rb",
     "spec/tickets_spec.rb",
+    "taskmapper-redmine.gemspec",
     "ticketmaster-redmine.gemspec"
   ]
   s.homepage = "http://github.com/hybridgroup/taskmapper-redmine"
