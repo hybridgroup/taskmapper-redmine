@@ -50,15 +50,14 @@ describe TaskMapper::Provider::Redmine::Ticket do
     describe "Retrieving a single ticket" do 
       context "when #ticket with an id" do 
         subject { project.ticket ticket_id }
+        it { should be_an_instance_of ticket_class }
+      end
+
+      context "when #ticket with attributes" do 
+        subject { project.ticket :id => ticket_id }
+        it { should be_an_instance_of ticket_class }
       end
     end
-  end
-
-  it "should be able to load a single ticket" do
-    pending
-    @ticket = @project.ticket(1)
-    @ticket.should be_an_instance_of(@klass)
-    @ticket.title.should == 'test-issue'
   end
 
   it "should be able to update and save a ticket" do
