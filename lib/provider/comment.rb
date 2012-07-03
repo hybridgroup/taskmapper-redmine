@@ -23,6 +23,18 @@ module TaskMapper::Provider
         end
       end
 
+      def save
+        issue = API.find(ticket_id)
+        journal = issue.journals.find { |jou| jou.id.to_i == id.to_i }
+        journal.notes = body
+        issue.journals.inject([]) do |arr, jour|
+          arr << jour unless jour.id == journal.id
+          arr
+        end
+        issue.journals << journal
+        issue.save
+      end
+
       def self.find_by_id(project_id, ticket_id, id)
         self.search(ticket_id).select { |journal| journal.id == id.to_i }.first
       end

@@ -75,5 +75,12 @@ describe TaskMapper::Provider::Redmine::Comment do
         it { should_not be_zero }
       end
     end
+
+    context "when #save" do 
+      let(:comment) { ticket.comment(comment_id) }
+      let(:changed_comment) { comment.body = 'change'; comment }
+      subject { changed_comment.save }
+      it { should be_true }
+    end
   end
 end

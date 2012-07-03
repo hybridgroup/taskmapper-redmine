@@ -1,0 +1,15 @@
+" Press ? for help
+
+.. (up a dir)
+</code/ruby/taskmapper-redmine/
+▸ lib/
+▸ pkg/
+▸ spec/
+  Gemfile
+  Gemfile.lock
+  LICENSE
+  Rakefile
+  README.md
+  taskmapper-redmine.gemspec
+  ticketmaster-redmine.gemspec
+  VERSION
