@@ -24,15 +24,7 @@ module TaskMapper::Provider
       end
 
       def save
-        issue = API.find(ticket_id)
-        journal = issue.journals.find { |jou| jou.id.to_i == id.to_i }
-        journal.notes = body
-        issue.journals.inject([]) do |arr, jour|
-          arr << jour unless jour.id == journal.id
-          arr
-        end
-        issue.journals << journal
-        issue.save
+        raise TaskMapper::Exception.new "Redmine API doesn't support comment updates"
       end
 
       def self.find_by_id(project_id, ticket_id, id)
@@ -61,6 +53,15 @@ module TaskMapper::Provider
         journal.notes = attributes[:body]
         journal.save
         journal
+      end
+    end
+
+    class Net::HTTP
+      def send(*args)
+        puts "request: #{args.inspect}"
+        resp = super 
+        puts "response: #{resp.inspect}"
+        resp
       end
     end
   end
