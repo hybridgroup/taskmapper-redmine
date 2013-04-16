@@ -3,11 +3,11 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem "taskmapper", "~> 0.8"
+gem "taskmapper"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
-group :development do
-  gem "rspec", "~> 2.8"
+group :development, :test do
+  gem "rspec"
   gem "jeweler", "~> 1.6"
   gem "simplecov", "~> 0.5", :platforms => :ruby_19
   gem "rcov", "~> 1.0", :platforms => :ruby_18
